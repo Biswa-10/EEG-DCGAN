@@ -17,6 +17,6 @@ if __name__ == '__main__':
 
     tf.reset_default_graph()
     
-    DCGAN = cDCGAN(num_epochs=10,discriminator_learning_rate=.0001,generator_learning_rate=.001,batch_size=50)
+    DCGAN = cDCGAN(num_epochs=10,image_shape=(10,4,1),discriminator_learning_rate=.0001,generator_learning_rate=.001,batch_size=50)
     DCGAN.train()
     DCGAN.test()

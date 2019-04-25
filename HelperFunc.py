@@ -18,11 +18,12 @@ def loss_func(predicted,labels):
 
 def get_next_batch(x_data,y_data,itr,batch_size,img_shape=(28,28,1)):
     
-    x_next_batch = x_data[itr*batch_size : (itr+1)*batch_size, : , :]
-    x_next_batch = np.reshape(x_next_batch,(batch_size,img_shape[0],img_shape[1],img_shape[2]))
+    x_next_batch = x_data[itr*batch_size : (itr+1)*batch_size, : ]
+    x_next_b = np.reshape(x_next_batch,(batch_size,img_shape[0],img_shape[1],img_shape[2]))
     y_next_batch = y_data[itr*batch_size : (itr+1)*batch_size, : ]
+    y_next_b = np.reshape(y_next_batch,(batch_size,10))
     
-    return x_next_batch,y_next_batch
+    return x_next_b,y_next_b
 
 
 

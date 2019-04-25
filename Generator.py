@@ -17,15 +17,17 @@ def Generator(z,y,reuse=tf.AUTO_REUSE):
         # Reshape to a 4-D array of images: (batch, height, width, channels)
         # New shape: (batch, 6, 6, 128)
         z = tf.reshape(z, shape=(-1, 3, 3, 256))
-        z = tf.layers.conv2d_transpose(z,128,2,strides=2)
+        
+        z = tf.layers.conv2d_transpose(z,128,2,strides=1)
         z = tf.layers.batch_normalization(z)
         # Deconvolution, image shape: (batch, 14, 14, 64)
-        z = tf.layers.conv2d_transpose(z, 256, 4, strides=2)
+        z = tf.layers.conv2d_transpose(z, 200, (4,2), strides=2)
         z = tf.layers.batch_normalization(z)
         # Deconvolution, image shape: (batch, 28, 28, 1)
-        z = tf.layers.conv2d_transpose(z, 1, 2, strides=2)
+        z = tf.layers.conv2d_transpose(z, 1, (1,1), strides=1)
+        z = tf.layers.average_pooling2d(z, (1,2), (1,2))
         #z = tf.layers.batch_normalization(z)
         # Apply sigmoid to clip values between 0 and 1
-        z = tf.nn.sigmoid(z)
+        z = tf.nn.tanh(z)
         
         return z

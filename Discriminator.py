@@ -11,14 +11,14 @@ def Discriminator(x,y,reuse=tf.AUTO_REUSE):
     
     with tf.variable_scope('dis', reuse=reuse):
         # Typical convolutional neural network to classify images.
-        x = tf.layers.conv2d(x, 64, 5)
+        x = tf.layers.conv2d(x, 64, 2)
         x = tf.nn.leaky_relu(x)
         #x = tf.layers.batch_normalization(x)
-        x = tf.layers.average_pooling2d(x, 2, 2)
-        x = tf.layers.conv2d(x, 128, 5)
+        #x = tf.layers.average_pooling2d(x, 2, 2)
+        x = tf.layers.conv2d(x, 128,(2,1),strides=(1,1))
         x = tf.nn.leaky_relu(x)
         #x = tf.layers.batch_normalization(x)
-        x = tf.layers.average_pooling2d(x, 2, 2)
+        #x = tf.layers.average_pooling2d(x, 2, 2)
         x = tf.contrib.layers.flatten(x)
         
         x = tf.layers.dense(x, 1024)
